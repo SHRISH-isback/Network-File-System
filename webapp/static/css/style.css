@@ -1,0 +1,291 @@
+/* Custom styles for NFS Web App */
+
+:root {
+    --primary-color: #0d6efd;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,.2);
+}
+
+.file-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.file-item:hover {
+    background-color: #f8f9fa;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.folder-icon {
+    color: var(--warning-color);
+}
+
+.file-actions {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.file-item:hover .file-actions {
+    opacity: 1;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.tab-content {
+    padding: 15px 0;
+}
+
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+.badge {
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* File table styles */
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* Loading spinner overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn-group .btn {
+        margin-bottom: 5px;
+    }
+}
+
+/* Code editor styling */
+#fileContent {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#fileContent:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Info list */
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list strong {
+    color: var(--dark-color);
+    display: inline-block;
+    width: 150px;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+/* Active Users Sidebar Styling */
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+#activeUsersList {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#activeUsersList ul {
+    margin: 0;
+    padding: 0;
+}
+
+#activeUsersList li {
+    padding: 8px 12px;
+    margin: 0;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s;
+}
+
+#activeUsersList li:last-child {
+    border-bottom: none;
+}
+
+#activeUsersList li:hover {
+    background-color: #f8f9fa;
+}
+
+#activeUsersList .bi-person-circle {
+    font-size: 1rem;
+    color: #198754;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Sidebar card styling */
+.col-lg-3.col-md-4 .card {
+    border: 1px solid #e3e6f0;
+}
+
+.col-lg-3.col-md-4 .card-header {
+    background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c0 100%);
+    border-bottom: none;
+}
+
+/* Scrollbar styling for active users list */
+#activeUsersList::-webkit-scrollbar {
+    width: 6px;
+}
+
+#activeUsersList::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#activeUsersList::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+#activeUsersList::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

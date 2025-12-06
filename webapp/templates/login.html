@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Login - NFS{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="bi bi-hdd-network text-primary" style="font-size: 3rem;"></i>
+                    <h2 class="mt-3">Network File System</h2>
+                    <p class="text-muted" id="formSubtitle">Sign in to your account</p>
+                </div>
+                
+                <form method="POST" action="{{ url_for('login') }}" id="authForm">
+                    <input type="hidden" name="action" id="formAction" value="login">
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="username" 
+                                   name="username" 
+                                   placeholder="Enter your username"
+                                   required 
+                                   autofocus>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" 
+                                   class="form-control" 
+                                   id="password" 
+                                   name="password" 
+                                   placeholder="Enter your password"
+                                   minlength="6"
+                                   required>
+                        </div>
+                        <small class="text-muted">Password must be at least 6 characters</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                            <i class="bi bi-box-arrow-in-right"></i> <span id="btnText">Login</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p class="mb-0">
+                        <span id="toggleText">Don't have an account?</span>
+                        <a href="#" id="toggleMode" class="text-primary fw-bold">Register</a>
+                    </p>
+                </div>
+                
+                <script>
+                    // Toggle between login and register modes
+                    document.getElementById('toggleMode').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const action = document.getElementById('formAction');
+                        const subtitle = document.getElementById('formSubtitle');
+                        const btnText = document.getElementById('btnText');
+                        const toggleText = document.getElementById('toggleText');
+                        const toggleLink = document.getElementById('toggleMode');
+                        
+                        if (action.value === 'login') {
+                            // Switch to register mode
+                            action.value = 'register';
+                            subtitle.textContent = 'Create a new account';
+                            btnText.innerHTML = '<i class="bi bi-person-plus"></i> Register';
+                            toggleText.textContent = 'Already have an account?';
+                            toggleLink.textContent = 'Login';
+                        } else {
+                            // Switch to login mode
+                            action.value = 'login';
+                            subtitle.textContent = 'Sign in to your account';
+                            btnText.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+                            toggleText.textContent = "Don't have an account?";
+                            toggleLink.textContent = 'Register';
+                        }
+                    });
+                </script>
+                
+                <div class="mt-4 text-center">
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle"></i> 
+                        Make sure the NFS backend is running
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

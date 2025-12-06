@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFS Web App - UI Test Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        body { padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .test-result { margin-top: 10px; padding: 10px; border-radius: 4px; }
+        .test-pass { background: #d4edda; border: 1px solid #c3e6cb; }
+        .test-fail { background: #f8d7da; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4"><i class="bi bi-check2-circle"></i> NFS Web App - UI Test Page</h1>
+        <p class="lead">This page tests all UI components and JavaScript functions independently.</p>
+
+        <!-- Test 1: Bootstrap & Icons -->
+        <div class="test-section">
+            <h3>Test 1: Bootstrap & Icons Loading</h3>
+            <button class="btn btn-primary"><i class="bi bi-check"></i> Bootstrap Button</button>
+            <div class="test-result test-pass">
+                ✓ If you can see this styled button with an icon, Bootstrap is loaded correctly.
+            </div>
+        </div>
+
+        <!-- Test 2: Modal Test -->
+        <div class="test-section">
+            <h3>Test 2: Modal Functionality</h3>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#testModal">
+                <i class="bi bi-window"></i> Open Test Modal
+            </button>
+            <div class="test-result">
+                Click the button. If modal opens and closes properly, modal system works.
+            </div>
+        </div>
+
+        <!-- Test 3: Button Click Test -->
+        <div class="test-section">
+            <h3>Test 3: Button Click Handler</h3>
+            <button class="btn btn-success" onclick="testButtonClick()">
+                <i class="bi bi-hand-index"></i> Click Me
+            </button>
+            <div id="clickResult" class="test-result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 4: Form Input Test -->
+        <div class="test-section">
+            <h3>Test 4: Form Input & Enter Key</h3>
+            <input type="text" class="form-control mb-2" id="testInput" placeholder="Type something and press Enter">
+            <div id="inputResult" class="test-result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 5: Notification Test -->
+        <div class="test-section">
+            <h3>Test 5: Notification System</h3>
+            <button class="btn btn-success" onclick="testNotification('success')">Success</button>
+            <button class="btn btn-warning" onclick="testNotification('warning')">Warning</button>
+            <button class="btn btn-danger" onclick="testNotification('danger')">Error</button>
+            <button class="btn btn-info" onclick="testNotification('info')">Info</button>
+            <div id="notificationArea"></div>
+        </div>
+
+        <!-- Test 6: Fetch Test (Mock) -->
+        <div class="test-section">
+            <h3>Test 6: Fetch API Test</h3>
+            <button class="btn btn-primary" onclick="testFetch()">
+                <i class="bi bi-cloud-download"></i> Test Fetch
+            </button>
+            <div id="fetchResult" class="test-result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 7: Event Listener Test -->
+        <div class="test-section">
+            <h3>Test 7: Event Listeners</h3>
+            <button class="btn btn-info" id="eventTestBtn">
+                <i class="bi bi-broadcast"></i> Test Event Listener
+            </button>
+            <div id="eventResult" class="test-result" style="display:none;"></div>
+        </div>
+
+        <!-- Test Summary -->
+        <div class="test-section bg-light">
+            <h3>Test Summary</h3>
+            <div id="testSummary">
+                <p>Run all tests above to verify UI functionality.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Modal -->
+    <div class="modal fade" id="testModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Test Modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a test modal. If you can see this and close it, modals work!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="closeTestModal()">Close via JS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Test Scripts -->
+    <script>
+        let testsPassed = 0;
+        let testsTotal = 7;
+        let testModal;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            testModal = new bootstrap.Modal(document.getElementById('testModal'));
+            
+            // Test 4: Enter key listener
+            document.getElementById('testInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const value = e.target.value;
+                    const result = document.getElementById('inputResult');
+                    result.style.display = 'block';
+                    result.className = 'test-result test-pass';
+                    result.innerHTML = `✓ Enter key detected! You typed: "${value}"`;
+                    testsPassed++;
+                    updateSummary();
+                }
+            });
+
+            // Test 7: Event listener
+            document.getElementById('eventTestBtn').addEventListener('click', function() {
+                const result = document.getElementById('eventResult');
+                result.style.display = 'block';
+                result.className = 'test-result test-pass';
+                result.innerHTML = '✓ Event listener working correctly!';
+                testsPassed++;
+                updateSummary();
+            });
+
+            console.log('✓ DOMContentLoaded fired successfully');
+        });
+
+        // Test 3: Button click
+        function testButtonClick() {
+            const result = document.getElementById('clickResult');
+            result.style.display = 'block';
+            result.className = 'test-result test-pass';
+            result.innerHTML = '✓ Button click handler working!';
+            testsPassed++;
+            updateSummary();
+        }
+
+        // Test 5: Notifications
+        function testNotification(type) {
+            const area = document.getElementById('notificationArea');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-2`;
+            alertDiv.role = 'alert';
+            alertDiv.innerHTML = `
+                <strong>${type.toUpperCase()}!</strong> This is a ${type} notification.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            area.appendChild(alertDiv);
+            
+            // Auto-dismiss after 3 seconds
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+
+            testsPassed++;
+            updateSummary();
+        }
+
+        // Test 6: Fetch API
+        function testFetch() {
+            const result = document.getElementById('fetchResult');
+            result.style.display = 'block';
+            result.innerHTML = '<div class="spinner-border spinner-border-sm"></div> Testing...';
+            
+            // Test with a public API
+            fetch('https://api.github.com/zen')
+                .then(response => response.text())
+                .then(data => {
+                    result.className = 'test-result test-pass';
+                    result.innerHTML = `✓ Fetch API working! GitHub Zen: "${data}"`;
+                    testsPassed++;
+                    updateSummary();
+                })
+                .catch(error => {
+                    result.className = 'test-result test-fail';
+                    result.innerHTML = `✗ Fetch failed: ${error.message}`;
+                });
+        }
+
+        // Close modal via JS
+        function closeTestModal() {
+            testModal.hide();
+            setTimeout(() => {
+                alert('✓ Modal closed via JavaScript!');
+                testsPassed++;
+                updateSummary();
+            }, 500);
+        }
+
+        // Update summary
+        function updateSummary() {
+            const summary = document.getElementById('testSummary');
+            const percentage = Math.round((testsPassed / testsTotal) * 100);
+            summary.innerHTML = `
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: ${percentage}%">${percentage}%</div>
+                </div>
+                <p><strong>Tests Passed:</strong> ${testsPassed} / ${testsTotal}</p>
+                ${testsPassed === testsTotal ? '<p class="text-success"><strong>✓ All tests passed! UI is working correctly.</strong></p>' : ''}
+            `;
+        }
+
+        // Log to console
+        console.log('Test page loaded successfully');
+        console.log('Bootstrap version:', bootstrap.Tooltip.VERSION);
+    </script>
+</body>
+</html>
