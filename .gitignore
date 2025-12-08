@@ -98,3 +98,4 @@ test_output/
 # Documentation builds
 docs/_build/
 site/
+storage_data*
