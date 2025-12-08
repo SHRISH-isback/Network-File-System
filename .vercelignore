@@ -1,0 +1,18 @@
+# Ignore C source files and build artifacts
+*.o
+*.a
+*.so
+*.out
+client/
+name_server/
+storage_server/
+common/
+Makefile
+
+# Ignore Python files
+*.pyc
+__pycache__/
+*.py
+
+# Keep only webapp
+!webapp/

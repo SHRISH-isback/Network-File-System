@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "nfs-webapp",
+  "buildCommand": "cd webapp && npm install",
+  "builds": [
+    {
+      "src": "webapp/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "webapp/static/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/webapp/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/webapp/server.js"
+    }
+  ]
+}
