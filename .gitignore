@@ -1,6 +1,100 @@
+# C/C++ compiled files
+*.o
+*.a
+*.so
+*.out
+*.exe
+*.dll
+*.dylib
+
+# Executables (common names for your project)
+client
+name_server
+storage_server
+client/client
+name_server/name_server
+storage_server/storage_server
+
+# Core dumps
+core
+core.*
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 *.pyc
-.env
 .venv/
 venv/
 env/
+ENV/
+*.egg-info/
+dist/
+build/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask/Web
+instance/
+.webassets-cache
+*.db
+*.sqlite
+*.sqlite3
+
+# Node.js (for webapp)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.npm
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+*.logs
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+
+# Build directories
+bin/
+obj/
+out/
+target/
+
+# Test files
+test_output/
+*.test
+
+# Documentation builds
+docs/_build/
+site/
